@@ -1,0 +1,31 @@
+{
+  "Id": "cloudwatch-send-alarms",
+  "Statement": [
+    {
+      "Action": [
+        "SNS:GetTopicAttributes",
+        "SNS:SetTopicAttributes",
+        "SNS:AddPermission",
+        "SNS:RemovePermission",
+        "SNS:DeleteTopic",
+        "SNS:Subscribe",
+        "SNS:ListSubscriptionsByTopic",
+        "SNS:Publish",
+        "SNS:Receive"
+      ],
+      "Condition": {
+        "StringEquals": {
+          "AWS:SourceOwner": "${account_id}"
+        }
+      },
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "*"
+      },
+      "Resource": "arn:aws:sns:us-east-1:${account_id}:${alarm_name}",
+      "Sid": "cloudwatch-send-alarms"
+    }
+  ],
+  "Version": "2008-10-17"
+}
+
